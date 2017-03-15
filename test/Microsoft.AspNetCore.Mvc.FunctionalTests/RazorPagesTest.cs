@@ -168,6 +168,19 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Fact]
+        public async Task Page_Route_RouteDataCoercion()
+        {
+            // Arrange
+            var routeRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/RouteData/pizza");
+           
+            // Act
+            var routeResponse = await Client.SendAsync(routeRequest);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NotFound, routeResponse.StatusCode);
+        }
+
+        [Fact]
         public async Task Page_SetsPath()
         {
             // Arrange
@@ -414,7 +427,6 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var content = await response.Content.ReadAsStringAsync();
             Assert.Equal("Login Page", content);
         }
-
 
         [Fact]
         public async Task PageStart_IsDiscoveredWhenRootDirectoryIsNotSpecified()
