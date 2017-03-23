@@ -93,7 +93,6 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("CustomActionResult", content);
         }
 
-
         [Fact]
         public async Task PageModel_Handler_FormAction()
         {
@@ -168,7 +167,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Fact]
-        public async Task Page_Route_RouteDataCoercion()
+        public async Task Page_Route_RouteData_StringToIntCoercion_NotFound()
         {
             // Arrange
             var routeRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/RouteData/pizza");
