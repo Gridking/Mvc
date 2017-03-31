@@ -1,12 +1,12 @@
-﻿@page "{food:int}"
+﻿@page "{intRouteDataStringProperty:int}"
 
 @functions{
-    public string Food { get; set; }
+    public string IntRouteDataStringProperty { get; set; }
 
-    public void OnGet(string food = "default")
+    public void OnGet(string intRouteDataStringProperty = "default")
     {
-        Food = food;
+        IntRouteDataStringProperty = intRouteDataStringProperty;
     }
 }
 
-Food: @Food
+From RouteData: @IntRouteDataStringProperty

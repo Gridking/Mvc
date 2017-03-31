@@ -167,7 +167,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Fact]
-        public async Task Page_Route_RouteData_StringToIntCoercion_NotFound()
+        public async Task RouteData_StringValueOnIntProp_ExpectsNotFound()
         {
             // Arrange
             var routeRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/RouteData/pizza");
@@ -177,6 +177,22 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, routeResponse.StatusCode);
+        }
+
+        [Fact]
+        public async Task RouteData_IntProperty_IsCoerced()
+        {
+            // Arrange
+            var routeRequest = new HttpRequestMessage(HttpMethod.Get, "http://localhost/RouteData/5");
+
+            // Act
+            var routeResponse = await Client.SendAsync(routeRequest);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, routeResponse.StatusCode);
+
+            var content = await routeResponse.Content.ReadAsStringAsync();
+            Assert.Equal("From RouteData: 5", content.Trim());
         }
 
         [Fact]
